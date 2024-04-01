@@ -3,21 +3,6 @@ import Sequelize from 'sequelize';
 import registerModel from './register.model.js';
 import mysql2 from 'mysql2';
 
-// const sequelize = new Sequelize({
-//     host: dbConfig.HOST,
-//     username: dbConfig.USER,
-//     password: dbConfig.PASSWORD,
-//     dialect: "mysql",
-//     database: dbConfig.DB,
-//     benchmark: true,
-//     pool: {
-//         max: dbConfig.pool.max,
-//         min: dbConfig.pool.min,
-//         acquire: dbConfig.pool.acquire,
-//         idle: dbConfig.pool.idle
-//     }
-// });
-
 const sequelize = new Sequelize(
     process.env.BD_BBDD,
     process.env.BD_USER,
@@ -26,7 +11,14 @@ const sequelize = new Sequelize(
         dialect: 'mysql',
         dialectModule: mysql2, // Needed to fix sequelize issues with WebPack
         host: process.env.BD_HOST,
-        port: '3306'
+        port: '3306',
+        benchmark: true,
+        pool: {
+            max: dbConfig.pool.max,
+            min: dbConfig.pool.min,
+            acquire: dbConfig.pool.acquire,
+            idle: dbConfig.pool.idle
+        }
     }
 )
 
