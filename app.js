@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import db from "./app/models/index.js";
+import route from "./app/routes/routes.js";
 
 const app = express();
 dotenv.config();
@@ -44,13 +45,15 @@ app.use((req, res, next) => {
     }
 });
 
-app.get("/", (req, res) => {
-    res.send({message: "Hello World"});
-});
+// app.get("/", (req, res) => {
+//     res.send({message: "Hello World"});
+// });
+//
+// app.get('/about', (req, res) => {
+//     res.send('About route 🎉 ')
+// });
 
-app.get('/about', (req, res) => {
-    res.send('About route 🎉 ')
-});
+app.use("/", route);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
