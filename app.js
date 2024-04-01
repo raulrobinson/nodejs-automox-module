@@ -20,13 +20,18 @@ const app_ids = [
     process.env.APP_ID_SUB
 ];
 
-db.sequelize.sync()
-    .then(() => {
-        console.log('Synced with the remote database');
-    })
-    .catch((error) => {
-        console.log(`Failed to sync db: ${ error.message }`);
-    })
+try {
+    db.sequelize.sync()
+        .then(() => {
+            console.log('Synced with the remote database');
+        })
+        .catch((error) => {
+            console.log(`Failed to sync db: ${ error.message }`);
+        })
+
+} catch (error) {
+    console.log(`General Failed to sync db: ${ error.message }`);
+}
 
 app.use((req, res, next) => {
     const appId = req.headers['app_id'];
