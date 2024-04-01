@@ -13,25 +13,27 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 const app_ids = [
     process.env.APP_ID_MAIN,
     process.env.APP_ID_SUB
 ];
 
-try {
-    db.sequelize.sync()
-        .then(() => {
-            console.log('Synced with the remote database');
-        })
-        .catch((error) => {
-            console.log(`Failed to sync db: ${ error.message }`);
-        })
+(async () => {
+    try {
+        db.sequelize.sync()
+            .then(() => {
+                console.log('Synced with the remote database');
+            })
+            .catch((error) => {
+                console.log(`Failed to sync db: ${error.message}`);
+            })
 
-} catch (error) {
-    console.log(`General Failed to sync db: ${ error.message }`);
-}
+    } catch (error) {
+        console.log(`General Failed to sync db: ${error.message}`);
+    }
+})();
 
 app.use((req, res, next) => {
     const appId = req.headers['app_id'];
@@ -43,7 +45,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-    res.send({ message: "Hello World" });
+    res.send({message: "Hello World"});
 });
 
 app.get('/about', (req, res) => {
