@@ -16,6 +16,10 @@
     "sequelize"
   ],
   "author": "Raul R. Bolivar Navas @rasysbox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raulrobinson/nodejs-automox-module"
+  },
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
